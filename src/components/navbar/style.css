@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    padding: 0;
+    transition: 0.5s;
+    filter: brightness(20);
+}
+
+.logo:hover {
+    transform: scale(1.2);
+}
+
+.navbar-main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0% 20px;
+    background: linear-gradient(180deg,rgba(0, 0, 0, 0.356) 0%, rgba(0, 0, 0, 0) 100%);
+    
+}
+
+.links ul a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.user-icon {
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+.links ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin-right: 100px;
+    background-color: rgba(255, 255, 255, 0.041);
+    border-radius: 40px;
+    padding: 30px 20px;
+    box-shadow: 19px 24px 38px -8px rgba(0,0,0,0.31);
+    -webkit-box-shadow: 19px 24px 38px -8px rgba(0,0,0,0.31);
+    -moz-box-shadow: 19px 24px 38px -8px rgba(0,0,0,0.31);
+}
+
+.links ul li {
+    margin: 0px 15px;
+    font-size: 22px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.links ul li:hover {
+    color: #ffffff9d;
+    transform: scale(1.1);
+}
+
+/* Estilos para o menu hambúrguer */
+.hamburger-menu {
+    display: none; /* Oculta o hambúrguer por padrão em telas maiores */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1000; /* Garante que o hambúrguer esteja acima de outros elementos */
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+/* Media query para telas menores (mobile) */
+@media (max-width: 1228px) {
+    .links {
+        display: none; /* Oculta os links por padrão em mobile */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px; /* Ajuste conforme a altura da sua navbar */
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.041); /* Cor de fundo do menu mobile */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .links.active {
+        display: flex; /* Mostra os links quando o menu está ativo */
+    }
+
+    .links ul {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .links ul li {
+        margin: 10px 0;
+    }
+
+    .hamburger-menu {
+        display: flex; /* Mostra o hambúrguer em mobile */
+    }
+
+    .navbar-main-container {
+        justify-content: space-between; /* Ajusta o espaçamento para mobile */
+    }
+}
