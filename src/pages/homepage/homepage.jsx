@@ -1,16 +1,29 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import './style.css'
 import Navbar from '../../components/navbar/navbar.jsx'
 import SplitText from '../../animations/SplitText/SplitText.jsx'
 import { IoIosArrowDown } from "react-icons/io";
 import Aos from 'aos'
 import 'aos/dist/aos.css'
+import Globe from "../../components/Globe/Globe.jsx";
+import TiltedCard from "../../components/TiltedCard/tiltedcard.jsx";
+import { gsap } from "gsap"; // 
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"; //
+import { TypeAnimation } from 'react-type-animation';
+import { color } from "motion";
+
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin); // Registre o plugin
 
 const handleAnimationComplete = () => {
     console.log('Animation completed');
 }
 
-function Homepage({ loadingComplete }) { // Recebe o prop loadingComplete
+function Homepage({ loadingComplete }) {
+  const content2Ref = useRef(null);
+
   useEffect(() => {
     Aos.init();
   }, []);
@@ -18,6 +31,12 @@ function Homepage({ loadingComplete }) { // Recebe o prop loadingComplete
   const handleFirstAnimationComplete = useCallback(() => {
     setShowSecondText(true);
   }, []);
+
+  const scrollToContent2 = () => {
+    if (content2Ref.current) {
+      gsap.to(window, { duration: 1, scrollTo: content2Ref.current, ease: "power2.out" }); // Use GSAP para rolar
+    }
+  };
 
   return (
     <div>
@@ -59,7 +78,7 @@ function Homepage({ loadingComplete }) { // Recebe o prop loadingComplete
                         />
                     )}
                     <div className="arrow-container">
-                        <IoIosArrowDown className="arrow-icon"/>
+                        <IoIosArrowDown className="arrow-icon" onClick={scrollToContent2}/>
                     </div>
                 </div>
                 <div className="wave-container">
@@ -71,9 +90,30 @@ function Homepage({ loadingComplete }) { // Recebe o prop loadingComplete
                         </svg>
                     </div>
                 </div>
-                <div className="content2">
-                    <div>
-                        <h1 data-aos="fade-up">Teste</h1>
+                <div className="content2-main" ref={content2Ref}>
+                    <div data-aos="fade-right" data-aos-duration="3000" className="content2-left"> 
+                        <p className="title-content-2-left">Nós do <span style={{color: '#1E121F', fontWeight: '800'}}>Lumina</span> acreditamos que</p>
+                        <TypeAnimation
+                            sequence={[
+                                // Same substring at the start will only be typed out once, initially
+                                'Estudar',
+                                6000, // wait 1s before replacing "Mice" with "Hamsters"
+                                'Aprender',
+                                6000,
+                                'Conhecer',
+                                6000,
+                                'Buscar',
+                                6000
+                            ]}
+                            wrapper="span"
+                            speed={200}
+                            style={{ fontSize: '3em', display: 'inline-block', fontWeight: 700 }}
+                            repeat={Infinity}
+                        />
+                        <span className="desc-content-2-left">em <span className="focus-text-content-2-left">Conjunto</span> é a chave para o sucesso!</span>
+                    </div>
+                    <div data-aos="fade-left" data-aos-duration="3000" className="content2-globe">
+                        <Globe/>
                     </div>
                 </div>
             </div>

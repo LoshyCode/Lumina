@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: rgb(255, 255, 255);
     overflow-x: hidden;
@@ -133,12 +137,40 @@ body {
     margin-top: -1px; /* Evita gap entre seções */
 }
 
-.content2 {
+.content2-main {
     z-index: 100;
     background-color: white;
     padding: 2rem;
-    position: relative;
-    min-height: 300px; /* Altura mínima para o conteúdo */
+    min-height: 300px;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    justify-content: space-around; /* Altura mínima para o conteúdo */
+}
+
+.content2-left{
+    max-width: 900px;
+}
+
+.title-content-2-left {
+    font-size: 2rem;
+    font-weight: 100;
+    font-style: normal;
+    color: #636363;
+}
+
+.desc-content-2-left {
+    font-size: 2rem;
+    font-weight: 100;
+    font-style: normal;
+    color: #000000;
+}
+
+.focus-text-content-2-left {
+    font-size: 2rem;
+    font-weight: 800;
+    font-style: normal;
+    color: #000000;
 }
 
 .custom-shape-divider-bottom-1757730134 {
@@ -160,6 +192,15 @@ body {
 
 .custom-shape-divider-bottom-1757730134 .shape-fill {
     fill: #FFFFFF;
+}
+
+.tilted-card-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: normal;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
 }
 
 ::-webkit-scrollbar {
