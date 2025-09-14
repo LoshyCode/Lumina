@@ -22,6 +22,10 @@
 }
 
 .navbar-main-container {
+    position: fixed; /* Fixa a navbar na tela */
+    top: 0; /* Alinha a navbar ao topo */
+    width: 100%; /* Garante que a navbar ocupe toda a largura */
+    z-index: 1000; /* Garante que a navbar fique acima de outros elementos */
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,17 +1,20 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import './style.css'
 import Navbar from '../../components/navbar/navbar.jsx'
 import SplitText from '../../animations/SplitText/SplitText.jsx'
 import { IoIosArrowDown } from "react-icons/io";
-import ScrollFloat from '../../animations/ScrollFloat/ScrollFloat.jsx'
+import Aos from 'aos'
+import 'aos/dist/aos.css'
 
 const handleAnimationComplete = () => {
     console.log('Animation completed');
 }
 
-function Homepage() {
+function Homepage({ loadingComplete }) { // Recebe o prop loadingComplete
+  useEffect(() => {
+    Aos.init();
+  }, []);
   const [showSecondText, setShowSecondText] = useState(false);
-
   const handleFirstAnimationComplete = useCallback(() => {
     setShowSecondText(true);
   }, []);
@@ -24,21 +27,23 @@ function Homepage() {
         </div>
             <div className="main-content">
                 <div className="content1">
-                    <SplitText
-                        text="Bem vindo ao Lumina!"
-                        className="welcome-text"
-                        delay={50}
-                        duration={0.6}
-                        ease="power3.out"
-                        splitType="chars"
-                        from={{ opacity: 0, y: 40 }}
-                        to={{ opacity: 1, y: 0 }}
-                        threshold={0.1}
-                        rootMargin="-100px"
-                        textAlign="center"
-                        onLetterAnimationComplete={handleFirstAnimationComplete}
-                    />
-                    {showSecondText && (
+                    {loadingComplete && ( // Renderiza SplitText apenas se loadingComplete for true
+                        <SplitText
+                            text="Bem vindo ao Lumina!"
+                            className="welcome-text"
+                            delay={50}
+                            duration={0.6}
+                            ease="power3.out"
+                            splitType="chars"
+                            from={{ opacity: 0, y: 40 }}
+                            to={{ opacity: 1, y: 0 }}
+                            threshold={0.1}
+                            rootMargin="-100px"
+                            textAlign="center"
+                            onLetterAnimationComplete={handleFirstAnimationComplete}
+                        />
+                    )}
+                    {showSecondText && loadingComplete && ( // Também condicional
                         <SplitText
                             text="Aprendendo em conjunto, brilhamos mais!"
                             className="second-text"
@@ -54,7 +59,7 @@ function Homepage() {
                         />
                     )}
                     <div className="arrow-container">
-                        <IoIosArrowDown />
+                        <IoIosArrowDown className="arrow-icon"/>
                     </div>
                 </div>
                 <div className="wave-container">
@@ -68,7 +73,7 @@ function Homepage() {
                 </div>
                 <div className="content2">
                     <div>
-                        content
+                        <h1 data-aos="fade-up">Teste</h1>
                     </div>
                 </div>
             </div>

@@ -39,7 +39,7 @@ body {
 }
 
 .content1 {
-    height: 80vh; /* Altura total da viewport */
+    height: 90vh; /* Altura total da viewport */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,8 +49,8 @@ body {
 
 .welcome-text {
     position: absolute;
-    top: 200px;
-    font-size: 5rem;
+    top: 300px;
+    font-size: 6rem;
     font-weight: 700;
     font-style: normal;
     color: white;
@@ -60,8 +60,8 @@ body {
 
 .second-text {
     position: absolute;
-    top: 290px;
-    font-size: 3rem;
+    top: 390px;
+    font-size: 4rem;
     font-weight: 100;
     font-style: normal;
     color: white;
@@ -84,6 +84,16 @@ body {
     letter-spacing: 0.1rem;
     cursor: pointer;
     animation: myAnim 6s ease 0s 1 normal forwards;
+    transition: 0.2s;
+}
+
+.arrow-icon {
+    font-size: 3rem;
+    transition: 0.5s;
+}
+
+.arrow-icon:hover {
+    transform: translateY(20px);
 }
 
 @keyframes myAnim {
