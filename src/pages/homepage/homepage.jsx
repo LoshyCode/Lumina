@@ -7,15 +7,14 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import Globe from "../../components/Globe/Globe.jsx";
 import TiltedCard from "../../components/TiltedCard/tiltedcard.jsx";
-import { gsap } from "gsap"; // 
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"; //
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { TypeAnimation } from 'react-type-animation';
 import { color } from "motion";
 
-
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(ScrollToPlugin); // Registre o plugin
+gsap.registerPlugin(ScrollTrigger); // Registra o plugin ScrollTrigger
+gsap.registerPlugin(ScrollToPlugin); // Registra o plugin ScrollToPlugin
 
 const handleAnimationComplete = () => {
     console.log('Animation completed');
@@ -23,18 +22,22 @@ const handleAnimationComplete = () => {
 
 function Homepage({ loadingComplete }) {
   const content2Ref = useRef(null);
-
-  useEffect(() => {
-    Aos.init();
-  }, []);
-  const [showSecondText, setShowSecondText] = useState(false);
+  
+  const [showSecondText, setShowSecondText] = useState(false); // Estado para controlar a exibição do segundo texto
   const handleFirstAnimationComplete = useCallback(() => {
     setShowSecondText(true);
   }, []);
 
-  const scrollToContent2 = () => {
+  useEffect(() => { // Inicializa a animação do AOS
+    Aos.init({
+      duration: 1000,
+      once: false,
+    });
+  }, []);
+
+  const scrollToContent2 = () => { // Rola para o conteúdo 2
     if (content2Ref.current) {
-      gsap.to(window, { duration: 1, scrollTo: content2Ref.current, ease: "power2.out" }); // Use GSAP para rolar
+      gsap.to(window, { duration: 1, scrollTo: content2Ref.current, ease: "power2.out" });
     }
   };
 
@@ -46,26 +49,26 @@ function Homepage({ loadingComplete }) {
         </div>
             <div className="main-content">
                 <div className="content1">
-                    {loadingComplete && ( // Renderiza SplitText apenas se loadingComplete for true
-                        <SplitText
-                            text="Bem vindo ao Lumina!"
-                            className="welcome-text"
-                            delay={50}
+                    {loadingComplete && (
+                        <SplitText // Animação do texto "Lumina"
+                            text="Lumina"
+                            className="welcome-text Paytone"
+                            delay={200}
                             duration={0.6}
                             ease="power3.out"
                             splitType="chars"
                             from={{ opacity: 0, y: 40 }}
                             to={{ opacity: 1, y: 0 }}
-                            threshold={0.1}
+                            threshold={0.10}
                             rootMargin="-100px"
                             textAlign="center"
                             onLetterAnimationComplete={handleFirstAnimationComplete}
                         />
                     )}
-                    {showSecondText && loadingComplete && ( // Também condicional
+                    {showSecondText && loadingComplete && ( // Animação do texto "Aprendendo em conjunto, brilhamos mais!"
                         <SplitText
                             text="Aprendendo em conjunto, brilhamos mais!"
-                            className="second-text"
+                            className="second-text Paytone"
                             delay={50}
                             duration={0.6}
                             ease="power3.out"
@@ -90,30 +93,34 @@ function Homepage({ loadingComplete }) {
                         </svg>
                     </div>
                 </div>
-                <div className="content2-main" ref={content2Ref}>
-                    <div data-aos="fade-right" data-aos-duration="3000" className="content2-left"> 
-                        <p className="title-content-2-left">Nós do <span style={{color: '#1E121F', fontWeight: '800'}}>Lumina</span> acreditamos que</p>
-                        <TypeAnimation
-                            sequence={[
-                                // Same substring at the start will only be typed out once, initially
-                                'Estudar',
-                                6000, // wait 1s before replacing "Mice" with "Hamsters"
-                                'Aprender',
-                                6000,
-                                'Conhecer',
-                                6000,
-                                'Buscar',
-                                6000
-                            ]}
-                            wrapper="span"
-                            speed={200}
-                            style={{ fontSize: '3em', display: 'inline-block', fontWeight: 700 }}
-                            repeat={Infinity}
-                        />
-                        <span className="desc-content-2-left">em <span className="focus-text-content-2-left">Conjunto</span> é a chave para o sucesso!</span>
+                <div className="content2-main" ref={content2Ref}> 
+                    <div className="content2-left">
+                        <div data-aos="fade-right" data-aos-duration="1500">
+                            <p className="title-content-2-left Bebas">Nós do <span style={{color: '#1E121F', fontWeight: '800'}} className="Bebas">Lumina</span> acreditamos que</p>
+                        </div>
+                        <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="400">
+                            <TypeAnimation // Animação do texto "Estudar, Aprender, Conhecer, Buscar"
+                                sequence={[
+                                    'Estudar',
+                                    6000, //
+                                    'Aprender',
+                                    6000,
+                                    'Conhecer',
+                                    6000,
+                                    'Buscar',
+                                    6000
+                                ]}
+                                wrapper="span"
+                                speed={200}
+                                style={{ fontSize: '5em', display: 'inline-block', fontWeight: 700, color: '#1E121F' }}
+                                repeat={Infinity}
+                                className="Bebas"
+                            />
+                            <span className="desc-content-2-left Bebas">em <span className="focus-text-content-2-left Bebas">Conjunto</span> é a chave para o sucesso!</span>
+                        </div>
                     </div>
-                    <div data-aos="fade-left" data-aos-duration="3000" className="content2-globe">
-                        <Globe/>
+                    <div data-aos="fade-left" data-aos-duration="1500" className="globe"> 
+                        <Globe className="globe"/>
                     </div>
                 </div>
             </div>

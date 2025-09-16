@@ -1,9 +1,9 @@
 import createGlobe from "cobe";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, forwardRef } from "react";
 
 // https://github.com/shuding/cobe
 
-export default function Globe() {
+const Globe = forwardRef((props, ref) => {
   const canvasRef = useRef();
 
   useEffect(() => {
@@ -42,11 +42,13 @@ export default function Globe() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" ref={ref}>
       <canvas
         ref={canvasRef}
         style={{ width: 600, height: 600, maxWidth: "100%", aspectRatio: 1 }}
       />
     </div>
   );
-}
+});
+
+export default Globe;

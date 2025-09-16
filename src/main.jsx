@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner.jsx';
 import Homepage from './pages/homepage/homepage.jsx';
+import { ReactLenis, useLenis } from 'lenis/react'; // Importar ReactLenis e useLenis
 
 function Main() {
   const [progress, setProgress] = useState(0);
@@ -22,11 +23,14 @@ function Main() {
     return () => clearInterval(interval);
   }, []);
 
+  
   return (
     <React.StrictMode>
-      <LoadingSpinner progress={progress}>
-        <Homepage loadingComplete={loadingComplete} /> {/* Passa o prop */}
-      </LoadingSpinner>
+      <ReactLenis root options={{ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) }}>
+        <LoadingSpinner progress={progress}>
+          <Homepage loadingComplete={loadingComplete} /> {/* Passa o prop */}
+        </LoadingSpinner>
+      </ReactLenis>
     </React.StrictMode>
   );
 }
